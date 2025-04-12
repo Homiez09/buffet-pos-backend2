@@ -6,8 +6,10 @@ import com.buffetpos.backend.responses.AuthResponse;
 import com.buffetpos.backend.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,7 +25,7 @@ public class AuthController {
             description = "Registers a new user"
     )
     @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
+    public ResponseEntity<String> signUp(@RequestBody SignUpRequest request) {
         authService.signUp(request);
         return ResponseEntity.ok("User registered successfully");
     }

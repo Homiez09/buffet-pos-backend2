@@ -41,6 +41,7 @@ public class AuthService {
     }
 
     public AuthResponse signIn(SignInRequest request) {
+        System.out.println(request.getEmail());
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
