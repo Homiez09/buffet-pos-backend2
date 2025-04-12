@@ -1,12 +1,13 @@
 package com.buffetpos.backend.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
+@AllArgsConstructor
 @Data
 @NoArgsConstructor
 public class Category {
@@ -16,6 +17,8 @@ public class Category {
 
     @Column(unique = true, nullable = false)
     private String name;
+
+    private boolean isDeleted = false;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
