@@ -10,8 +10,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
-@RequiredArgsConstructor
 public class AccessCodeFilter extends OncePerRequestFilter {
     private static final String HEADER_NAME = "AccessCode";
 

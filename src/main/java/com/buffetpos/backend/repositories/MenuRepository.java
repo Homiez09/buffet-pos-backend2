@@ -1,13 +1,10 @@
 package com.buffetpos.backend.repositories;
 
-import com.buffetpos.backend.models.Category;
+import com.buffetpos.backend.models.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Optional<Category> findByName(String name);
+public interface MenuRepository extends JpaRepository<Menu, Long> {
     boolean existsByName(String name);
 }
