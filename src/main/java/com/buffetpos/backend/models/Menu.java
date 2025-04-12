@@ -1,14 +1,16 @@
 package com.buffetpos.backend.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 @Table(name = "menus")
 @NoArgsConstructor
 public class Menu {
@@ -25,6 +27,9 @@ public class Menu {
     @Column(nullable = false)
     private boolean isActive;
 
+    @Column(nullable = false)
+    private boolean isDeleted;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -36,6 +41,8 @@ public class Menu {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.isActive = false;
+        this.isDeleted = false;
     }
 
     @PreUpdate

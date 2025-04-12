@@ -18,7 +18,7 @@ public class Category {
     @Column(unique = true, nullable = false)
     private String name;
 
-    private boolean isDeleted = false;
+    private boolean isDeleted;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -27,6 +27,7 @@ public class Category {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.isDeleted = false;
     }
 
     @PreUpdate
