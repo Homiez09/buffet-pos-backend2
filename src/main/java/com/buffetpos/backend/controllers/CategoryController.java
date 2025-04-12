@@ -11,15 +11,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 @Tag( name="Category Manager" )
 public class CategoryController {
     private final CategoryService categoryService;
 
     @Operation(
+            summary = "Get Categories",
+            description = "Gets all categories"
+    )
+    @GetMapping("/")
+    public ResponseEntity<?> getCategories() {
+        return ResponseEntity.ok(categoryService.getAllCategories());
+    }
+
+    @Operation(
+            summary = "Get Category",
+            description = "Gets a category by ID"
+    )
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCategory(@PathVariable Long id) {
+        return categoryService.getCategory(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @Operation(
             summary = "Create Category",
             description = "Creates a new category"
     )
-    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/")
     public ResponseEntity<?> createCategory(String name) {
         categoryService.createCategory(name);
@@ -30,7 +50,6 @@ public class CategoryController {
             summary = "Remove Category",
             description = "Removes a category"
     )
-    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeCategory(Long id) {
         categoryService.removeCategory(id);
@@ -41,7 +60,6 @@ public class CategoryController {
             summary = "Update Category",
             description = "Updates a category"
     )
-    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable Long id, String name) {
         categoryService.updateCategory(id, name);
