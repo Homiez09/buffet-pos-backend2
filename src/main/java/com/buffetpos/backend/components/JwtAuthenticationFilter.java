@@ -1,4 +1,4 @@
-package com.buffetpos.backend.security;
+package com.buffetpos.backend.components;
 
 import com.buffetpos.backend.services.JwtService;
 import com.buffetpos.backend.models.User;
