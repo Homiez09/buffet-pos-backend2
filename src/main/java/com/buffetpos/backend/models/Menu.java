@@ -25,7 +25,6 @@ public class Menu {
     @Column(nullable = false)
     private boolean isActive;
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
