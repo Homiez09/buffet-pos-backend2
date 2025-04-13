@@ -44,7 +44,7 @@ public class CategoryController {
             description = "Creates a new category"
     )
     @PostMapping("/")
-    public ResponseEntity<String> createCategory(String name) {
+    public ResponseEntity<String> createCategory(@RequestBody String name) {
         categoryService.createCategory(name);
         return ResponseEntity.created(null).body("Category created successfully");
     }
@@ -54,7 +54,7 @@ public class CategoryController {
             description = "Removes a category"
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> removeCategory(Long id) {
+    public ResponseEntity<String> removeCategory(@PathVariable Long id) {
         categoryService.removeCategory(id);
         return ResponseEntity.ok("Category removed successfully");
     }

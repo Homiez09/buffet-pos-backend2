@@ -7,6 +7,7 @@ import com.buffetpos.backend.services.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class MenuController {
             description = "Gets a menu by ID"
     )
     @GetMapping("/{id}")
-    public ResponseEntity<Menu> getMenu(Long id) {
+    public ResponseEntity<Menu> getMenu(@PathVariable Long id) {
         return menuService.getMenu(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -47,7 +48,7 @@ public class MenuController {
             description = "Creates a new menu"
     )
     @PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> createMenu(@ModelAttribute MenuRequest menuRequest) {
+    public ResponseEntity<String> createMenu(@Valid @ModelAttribute MenuRequest menuRequest) {
 
         menuService.createMenu(menuRequest);
         return ResponseEntity.created(null).body("Menu created successfully");
@@ -58,7 +59,7 @@ public class MenuController {
             description = "Removes a menu"
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> removeMenu(Long id) {
+    public ResponseEntity<String> removeMenu(@PathVariable Long id) {
         menuService.removeMenu(id);
         return ResponseEntity.ok("Menu removed successfully");
     }
@@ -68,7 +69,7 @@ public class MenuController {
             description = "Updates a menu"
     )
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateMenu(@PathVariable Long id, MenuUpdateRequest menuUpdateRequest) {
+    public ResponseEntity<String> updateMenu(@PathVariable Long id, @Valid @RequestBody MenuUpdateRequest menuUpdateRequest) {
         menuService.updateMenu(id, menuUpdateRequest);
         return ResponseEntity.ok("Menu updated successfully");
     }

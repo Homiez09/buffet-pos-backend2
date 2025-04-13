@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 public class SignInRequest {
     @NotNull(message = "Email cannot be null")
-    @NotBlank(message = "Email cannot be empty")
+    @NotBlank(message = "Email cannot be empty or whitespace")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Email is not valid")
     private String email;
 
     @NotNull(message = "Password cannot be null")
-    @NotBlank(message = "Password cannot be empty")
+    @NotBlank(message = "Password cannot be empty or whitespace")
     private String password;
 }
