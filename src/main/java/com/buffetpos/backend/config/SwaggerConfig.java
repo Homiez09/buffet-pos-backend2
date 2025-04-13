@@ -22,6 +22,7 @@ public class SwaggerConfig {
                 .addTagsItem(new Tag().name("General").description("General endpoints"))
                 .addTagsItem(new Tag().name("Authentication").description("Authentication endpoints"))
                 .addTagsItem(new Tag().name("Category Manager").description("Category endpoints"))
+                .addTagsItem(new Tag().name("Menu Manager").description("Menu endpoints"))
                 .addSecurityItem(new SecurityRequirement().addList(bearerScheme))
                 .addSecurityItem(new SecurityRequirement().addList(accessCodeScheme))
                 .components(new io.swagger.v3.oas.models.Components()

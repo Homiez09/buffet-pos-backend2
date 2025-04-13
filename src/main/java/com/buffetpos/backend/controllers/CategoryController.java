@@ -1,10 +1,12 @@
 package com.buffetpos.backend.controllers;
 
 import com.buffetpos.backend.models.Category;
+import com.buffetpos.backend.requests.CategoryRequest;
 import com.buffetpos.backend.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +46,8 @@ public class CategoryController {
             description = "Creates a new category"
     )
     @PostMapping("/")
-    public ResponseEntity<String> createCategory(@RequestBody String name) {
-        categoryService.createCategory(name);
+    public ResponseEntity<String> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+        categoryService.createCategory(categoryRequest.getName());
         return ResponseEntity.created(null).body("Category created successfully");
     }
 
@@ -64,8 +66,8 @@ public class CategoryController {
             description = "Updates a category"
     )
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCategory(@PathVariable Long id, String name) {
-        categoryService.updateCategory(id, name);
+    public ResponseEntity<String> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequest categoryRequest) {
+        categoryService.updateCategory(id, categoryRequest.getName());
         return ResponseEntity.ok("Category updated successfully");
     }
 }
