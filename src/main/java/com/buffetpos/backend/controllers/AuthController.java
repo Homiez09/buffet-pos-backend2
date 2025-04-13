@@ -25,7 +25,7 @@ public class AuthController {
             description = "Registers a new user"
     )
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody SignUpRequest request) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequest request) {
         authService.signUp(request);
         return ResponseEntity.ok("User registered successfully");
     }
@@ -35,7 +35,7 @@ public class AuthController {
             description = "Authenticates a user and returns a JWT token"
     )
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> signIn(@RequestBody SignInRequest request) {
+    public ResponseEntity<AuthResponse> signIn(@Valid @RequestBody SignInRequest request) {
         return ResponseEntity.ok(authService.signIn(request));
     }
 }
